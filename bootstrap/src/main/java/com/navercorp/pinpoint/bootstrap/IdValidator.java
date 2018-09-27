@@ -47,6 +47,11 @@ public class IdValidator {
         logger.info("check -D" + propertyName);
         String value = property.getProperty(propertyName);
         if (value == null){
+            value = propertyName;
+            property.setProperty(propertyName, propertyName);
+        }
+
+        if (value == null){
             logger.warn("-D" + propertyName + " is null. value:null");
             return null;
         }
