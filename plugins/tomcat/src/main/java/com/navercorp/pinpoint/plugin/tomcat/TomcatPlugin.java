@@ -71,7 +71,8 @@ public class TomcatPlugin implements ProfilerPlugin, TransformTemplateAware {
         final ConditionProvider conditionProvider = ConditionProvider.DEFAULT_CONDITION_PROVIDER;
         final boolean isTomcatApplication = conditionProvider.checkMainClass(config.getBootstrapMains());
         final boolean isSpringBootApplication = conditionProvider.checkMainClass(config.getSpringBootBootstrapMains());
-        return isTomcatApplication || isSpringBootApplication;
+        final boolean cls = true;
+        return isTomcatApplication || isSpringBootApplication || cls;
     }
 
     private void addTransformers(TomcatConfig config) {

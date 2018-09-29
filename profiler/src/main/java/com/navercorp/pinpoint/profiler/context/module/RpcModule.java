@@ -19,17 +19,11 @@ package com.navercorp.pinpoint.profiler.context.module;
 import com.google.inject.Key;
 import com.google.inject.PrivateModule;
 import com.google.inject.Scopes;
-import com.navercorp.pinpoint.profiler.context.provider.CommandDispatcherProvider;
-import com.navercorp.pinpoint.profiler.context.provider.ConnectionFactoryProviderProvider;
-import com.navercorp.pinpoint.profiler.context.provider.HeaderTBaseSerializerProvider;
-import com.navercorp.pinpoint.profiler.context.provider.PinpointClientFactoryProvider;
-import com.navercorp.pinpoint.profiler.context.provider.SpanDataSenderProvider;
-import com.navercorp.pinpoint.profiler.context.provider.SpanStatClientFactoryProvider;
-import com.navercorp.pinpoint.profiler.context.provider.StatDataSenderProvider;
-import com.navercorp.pinpoint.profiler.context.provider.TcpDataSenderProvider;
+import com.navercorp.pinpoint.profiler.context.provider.*;
 import com.navercorp.pinpoint.profiler.receiver.CommandDispatcher;
 import com.navercorp.pinpoint.profiler.sender.DataSender;
 import com.navercorp.pinpoint.profiler.sender.EnhancedDataSender;
+import com.navercorp.pinpoint.profiler.sender.LoggingDataSender;
 import com.navercorp.pinpoint.rpc.client.ConnectionFactoryProvider;
 import com.navercorp.pinpoint.rpc.client.PinpointClientFactory;
 import com.navercorp.pinpoint.thrift.io.HeaderTBaseSerializer;
@@ -50,7 +44,7 @@ public class RpcModule extends PrivateModule {
 
         bind(HeaderTBaseSerializer.class).toProvider(HeaderTBaseSerializerProvider.class).in(Scopes.SINGLETON);
 
-        bind(EnhancedDataSender.class).toProvider(TcpDataSenderProvider.class).in(Scopes.SINGLETON);
+        bind(EnhancedDataSender.class).toProvider(LoggingDataSenderProvider.class).in(Scopes.SINGLETON);
         expose(EnhancedDataSender.class);
 
         Key<PinpointClientFactory> pinpointStatClientFactory = Key.get(PinpointClientFactory.class, SpanStatClientFactory.class);

@@ -85,6 +85,7 @@
         <!--<module>web</module>-->
         <!--<module>hbase</module>-->
         <!--<module>flink</module>-->
+        <!--<module>sandbox</module>-->
     </modules>
 
     <properties>

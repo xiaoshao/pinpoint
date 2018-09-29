@@ -52,9 +52,7 @@ public class TomcatDetector implements ApplicationTypeDetector {
 
     @Override
     public boolean detect(ConditionProvider provider) {
-        return provider.checkMainClass(bootstrapMains) &&
-               provider.checkSystemProperty(REQUIRED_SYSTEM_PROPERTY) &&
-               provider.checkForClass(REQUIRED_CLASS);
+        return true;
     }
 
 }
