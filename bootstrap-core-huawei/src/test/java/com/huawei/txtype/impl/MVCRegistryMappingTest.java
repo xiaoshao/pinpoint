@@ -1,0 +1,36 @@
+package com.huawei.txtype.impl;
+
+import com.huawei.txtype.RequestMappingInfo;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.junit.MockitoJUnitRunner;
+
+import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThat;
+
+@RunWith(MockitoJUnitRunner.class)
+public class MVCRegistryMappingTest {
+
+    @Test
+    public void should_ignore_the_request_mapping_with_invalid_level() {
+        MVCRegistryMapping mvcRegistryMapping = new MVCRegistryMapping();
+
+        mvcRegistryMapping.register(new RequestMappingInfo("/ignore", "POST", "GET"), 0);
+        mvcRegistryMapping.register(new RequestMappingInfo("/ignore", "POST"), 3);
+
+        assertNull(mvcRegistryMapping.match("/ignore", "GET"));
+    }
+
+    @Test
+    public void should_match_as_level_order() {
+        MVCRegistryMapping mvcRegistryMapping = new MVCRegistryMapping();
+
+        mvcRegistryMapping.register(new RequestMappingInfo("/ignore/{level1}", "POST", "GET"), 1);
+        mvcRegistryMapping.register(new RequestMappingInfo("/ignore/{level2}", "POST", "GET"), 2);
+        mvcRegistryMapping.register(new RequestMappingInfo("/ignore/{level2}/{level2}", "POST", "GET"), 2);
+
+        assertThat(mvcRegistryMapping.match("/ignore/match", "GET"), is(new RequestMappingInfo("/ignore/{level1}", "GET", "POST")));
+        assertThat(mvcRegistryMapping.match("/ignore/match/ma", "GET"), is(new RequestMappingInfo("/ignore/{level2}/{level2}", "GET", "POST")));
+    }
+}

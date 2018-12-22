@@ -12,6 +12,7 @@ import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.concurrent.ListenableFuture;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.AsyncRequestCallback;
 import org.springframework.web.client.AsyncRestTemplate;
@@ -34,11 +35,16 @@ public class FirstController {
 
 
     @ResponseBody
-    @GetMapping("/index")
-    public String index(){
-        return "hello world";
+    @GetMapping("/index/{name1}{age}")
+    public String index(@PathVariable("name1") int age, @PathVariable String name){
+        return "hello world" + age;
     }
 
+//    @ResponseBody
+//    @GetMapping("/index/{name}")
+//    public String index1(@PathVariable("name") String age){
+//        return "hello world" + age;
+//    }
 
 
     @GetMapping("/hello")
