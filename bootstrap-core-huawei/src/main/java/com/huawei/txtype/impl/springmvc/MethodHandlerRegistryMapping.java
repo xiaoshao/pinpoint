@@ -1,6 +1,6 @@
 package com.huawei.txtype.impl.springmvc;
 
-import com.huawei.txtype.DefaultRegistryMapping;
+import com.huawei.txtype.impl.DefaultRegistryMapping;
 import com.huawei.txtype.IMappingRegistry;
 import com.huawei.txtype.RequestMappingInfo;
 

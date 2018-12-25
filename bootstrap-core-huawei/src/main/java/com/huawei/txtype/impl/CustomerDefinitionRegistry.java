@@ -1,6 +1,5 @@
 package com.huawei.txtype.impl;
 
-import com.huawei.txtype.DefaultRegistryMapping;
 import com.huawei.txtype.RequestMappingInfo;
 import com.huawei.txtype.config.TxTypeConfiguration;
 import com.navercorp.pinpoint.bootstrap.config.ProfilerConfig;

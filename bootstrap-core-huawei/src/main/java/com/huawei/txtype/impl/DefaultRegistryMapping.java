@@ -1,4 +1,6 @@
-package com.huawei.txtype;
+package com.huawei.txtype.impl;
+
+import com.huawei.txtype.RequestMappingInfo;
 
 import java.util.ArrayList;
 import java.util.Collection;
