@@ -18,6 +18,7 @@ package com.navercorp.pinpoint.bootstrap.plugin.request;
 
 import com.navercorp.pinpoint.bootstrap.context.Header;
 import com.navercorp.pinpoint.bootstrap.context.SpanId;
+import com.navercorp.pinpoint.bootstrap.context.huawei.IMappingRegistry;
 import com.navercorp.pinpoint.bootstrap.logging.PLogger;
 import com.navercorp.pinpoint.bootstrap.logging.PLoggerFactory;
 import com.navercorp.pinpoint.bootstrap.sampler.SamplingFlagUtils;
@@ -32,7 +33,6 @@ public class DefaultTraceHeaderReader<T> implements TraceHeaderReader<T> {
     private final boolean isDebug = logger.isDebugEnabled();
 
     private final RequestAdaptor<T> requestAdaptor;
-
 
     public DefaultTraceHeaderReader(RequestAdaptor<T> requestAdaptor) {
         this.requestAdaptor = Assert.requireNonNull(requestAdaptor, "requestAdaptor must not be null");
@@ -70,12 +70,19 @@ public class DefaultTraceHeaderReader<T> implements TraceHeaderReader<T> {
         if (spanIdStr == null) {
             return NewTraceHeader.INSTANCE;
         }
+
+        String txType = requestAdaptor.getHeader(request, Header.HTTP_TXTYPE.toString());
+        if(txType == null){
+            return NewTraceHeader.INSTANCE;
+        }
         final long spanId = NumberUtils.parseLong(spanIdStr, SpanId.NULL);
 //        if (spanId  == SpanId.NULL) {
 //            throw new IllegalArgumentException();
 //        }
         final short flags = NumberUtils.parseShort(requestAdaptor.getHeader(request, Header.HTTP_FLAGS.toString()), (short) 0);
-        return new ContinueTraceHeader(transactionId, parentSpanId, spanId, flags);
+
+
+        return new ContinueTraceHeader(transactionId, parentSpanId, spanId, flags, txType);
     }
 
     private boolean samplingEnable(final T request) {

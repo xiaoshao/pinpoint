@@ -2,6 +2,7 @@ package com.huawei.txtype.config;
 
 import com.huawei.txtype.RequestMappingInfo;
 import com.navercorp.pinpoint.bootstrap.config.DefaultProfilerConfig;
+import com.navercorp.pinpoint.bootstrap.context.huawei.IRequestMappingInfo;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -27,7 +28,7 @@ public class TxTypeConfigurationTest {
        when(profilerConfig.readString(CUSTOMER_TXTYPE, "")).thenReturn("GET,POST_/hi/{name}");
 
        TxTypeConfiguration txTypeConfiguration = new TxTypeConfiguration(profilerConfig);
-       List<RequestMappingInfo> requestMappingInfos =  txTypeConfiguration.rules();
+       List<IRequestMappingInfo> requestMappingInfos =  txTypeConfiguration.rules();
 
        assertThat(requestMappingInfos, is(createRequestMappingInfos(new RequestMappingInfo("/hi/{name}", "GET", "POST"))));
     }
@@ -37,12 +38,12 @@ public class TxTypeConfigurationTest {
         when(profilerConfig.readString(CUSTOMER_TXTYPE, "")).thenReturn("/hi/{name}; GET,POST_/hi/{name}");
 
         TxTypeConfiguration txTypeConfiguration = new TxTypeConfiguration(profilerConfig);
-        List<RequestMappingInfo> requestMappingInfos =  txTypeConfiguration.rules();
+        List<IRequestMappingInfo> requestMappingInfos =  txTypeConfiguration.rules();
 
         assertThat(requestMappingInfos, is(createRequestMappingInfos(new RequestMappingInfo("/hi/{name}", "GET", "POST"))));
     }
 
-    private List<RequestMappingInfo> createRequestMappingInfos(RequestMappingInfo ... requestMappingInfos){
+    private List<IRequestMappingInfo> createRequestMappingInfos(IRequestMappingInfo ... requestMappingInfos){
         return Arrays.asList(requestMappingInfos);
     }
 }

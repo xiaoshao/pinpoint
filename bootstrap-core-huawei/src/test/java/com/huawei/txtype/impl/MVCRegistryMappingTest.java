@@ -1,6 +1,7 @@
 package com.huawei.txtype.impl;
 
 import com.huawei.txtype.RequestMappingInfo;
+import com.navercorp.pinpoint.bootstrap.context.huawei.IRequestMappingInfo;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
@@ -30,7 +31,10 @@ public class MVCRegistryMappingTest {
         mvcRegistryMapping.register(new RequestMappingInfo("/ignore/{level2}", "POST", "GET"), 2);
         mvcRegistryMapping.register(new RequestMappingInfo("/ignore/{level2}/{level2}", "POST", "GET"), 2);
 
-        assertThat(mvcRegistryMapping.match("/ignore/match", "GET"), is(new RequestMappingInfo("/ignore/{level1}", "GET", "POST")));
-        assertThat(mvcRegistryMapping.match("/ignore/match/ma", "GET"), is(new RequestMappingInfo("/ignore/{level2}/{level2}", "GET", "POST")));
+        IRequestMappingInfo expectedLevel1Result = new RequestMappingInfo("/ignore/{level1}", "GET", "POST");
+        IRequestMappingInfo expectedLevel2Result = new RequestMappingInfo("/ignore/{level2}/{level2}", "GET", "POST");
+
+        assertThat(mvcRegistryMapping.match("/ignore/match", "GET"), is(expectedLevel1Result));
+        assertThat(mvcRegistryMapping.match("/ignore/match/ma", "GET"), is(expectedLevel2Result));
     }
 }

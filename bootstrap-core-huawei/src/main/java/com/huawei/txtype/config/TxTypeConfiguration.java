@@ -2,6 +2,7 @@ package com.huawei.txtype.config;
 
 import com.huawei.txtype.RequestMappingInfo;
 import com.navercorp.pinpoint.bootstrap.config.ProfilerConfig;
+import com.navercorp.pinpoint.bootstrap.context.huawei.IRequestMappingInfo;
 import com.navercorp.pinpoint.common.util.StringUtils;
 
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ import java.util.Set;
 public class TxTypeConfiguration {
 
     private ProfilerConfig profilerConfig;
-    private List<RequestMappingInfo> requestMappingInfos;
+    private List<IRequestMappingInfo> requestMappingInfos;
     public static final String CUSTOMER_TXTYPE = "profiler.txtype";
 
     public TxTypeConfiguration(ProfilerConfig profilerConfig) {
@@ -20,7 +21,7 @@ public class TxTypeConfiguration {
         this.requestMappingInfos = initRequestMappingInfos();
     }
 
-    private List<RequestMappingInfo> initRequestMappingInfos(){
+    private List<IRequestMappingInfo> initRequestMappingInfos(){
 
         String customerDefinition = this.profilerConfig.readString(CUSTOMER_TXTYPE, "");
         if(StringUtils.isEmpty(customerDefinition)){
@@ -30,9 +31,9 @@ public class TxTypeConfiguration {
         }
     }
 
-    private List<RequestMappingInfo> parseTxTypeItems(String[] txtypes) {
+    private List<IRequestMappingInfo> parseTxTypeItems(String[] txtypes) {
 
-        List<RequestMappingInfo> requestMappingInfos = new ArrayList<RequestMappingInfo>();
+        List<IRequestMappingInfo> requestMappingInfos = new ArrayList<IRequestMappingInfo>();
 
         for(String txtype : txtypes){
 
@@ -63,7 +64,7 @@ public class TxTypeConfiguration {
         return patternString;
     }
 
-    public List<RequestMappingInfo> rules(){
+    public List<IRequestMappingInfo> rules(){
         return requestMappingInfos;
     }
 }

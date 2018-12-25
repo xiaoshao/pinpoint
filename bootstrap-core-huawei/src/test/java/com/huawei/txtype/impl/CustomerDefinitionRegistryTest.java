@@ -2,6 +2,7 @@ package com.huawei.txtype.impl;
 
 import com.huawei.txtype.RequestMappingInfo;
 import com.navercorp.pinpoint.bootstrap.config.DefaultProfilerConfig;
+import com.navercorp.pinpoint.bootstrap.context.huawei.IRequestMappingInfo;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -26,8 +27,10 @@ public class CustomerDefinitionRegistryTest {
 
         CustomerDefinitionRegistry customerDefinitionRegistry = new CustomerDefinitionRegistry(profilerConfig);
 
+        IRequestMappingInfo expectedResult = new RequestMappingInfo("/post/{name}/hi", "POST", "GET");
+
         assertThat(customerDefinitionRegistry.match("/post/hello/hi", "POST"),
-                is(new RequestMappingInfo("/post/{name}/hi", "POST", "GET")));
+                is(expectedResult));
 
     }
 

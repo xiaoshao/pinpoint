@@ -39,5 +39,11 @@
             <artifactId>pinpoint-bootstrap-core-huawei</artifactId>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
     </dependencies>
 </project>

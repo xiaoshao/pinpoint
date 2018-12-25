@@ -1,12 +1,11 @@
 package com.huawei.txtype.impl;
 
-import com.huawei.txtype.RequestMappingInfo;
 import com.huawei.txtype.config.TxTypeConfiguration;
 import com.navercorp.pinpoint.bootstrap.config.ProfilerConfig;
+import com.navercorp.pinpoint.bootstrap.context.huawei.IRequestMappingInfo;
 
 public class CustomerDefinitionRegistry extends DefaultRegistryMapping {
 
-    public static final int CUSTOMER_REGISTRY_LEVEL = 0;
     private TxTypeConfiguration txTypeConfiguration;
 
     public CustomerDefinitionRegistry(ProfilerConfig profilerConfig) {
@@ -15,7 +14,7 @@ public class CustomerDefinitionRegistry extends DefaultRegistryMapping {
 
 
     @Override
-    public RequestMappingInfo match(String uri, String method) {
+    public IRequestMappingInfo match(String uri, String method) {
         return super.match(txTypeConfiguration.rules(), uri, method);
     }
 }

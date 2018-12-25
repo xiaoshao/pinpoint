@@ -1,6 +1,6 @@
 package com.huawei.txtype.impl.springmvc;
 
-import com.huawei.txtype.IMappingRegistry;
+import com.navercorp.pinpoint.bootstrap.context.huawei.IMappingRegistry;
 
 import java.util.ArrayList;
 import java.util.List;

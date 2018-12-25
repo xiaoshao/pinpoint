@@ -34,9 +34,9 @@ public class BootDir {
     private final String bootstrapCoreOptional;
     private final String bootstrapJava9;
     private final String annotations;
+    private final String bootStrapCoreHuawei;
 
-
-    public BootDir(String commons, String bootstrapCore, String bootstrapCoreOptional, String bootstrapJava9, String annotations) {
+    public BootDir(String commons, String bootstrapCore, String bootstrapCoreOptional, String bootstrapJava9, String annotations, String bootStrapCoreHuawei) {
         if (commons == null) {
             throw new NullPointerException("commons must not be null");
         }
@@ -52,6 +52,8 @@ public class BootDir {
         this.bootstrapJava9 = bootstrapJava9;
         // optional
         this.annotations = annotations;
+
+        this.bootStrapCoreHuawei = bootStrapCoreHuawei;
 
         verify();
     }
@@ -86,6 +88,11 @@ public class BootDir {
         if (annotationsJar == null) {
             logger.info("pinpoint-annotations-x.x.x(-SNAPSHOT).jar not found");
         }
+
+        final String bootStrapCoreHuaweiJar = getBootStrapCoreHuawei();
+        if (bootStrapCoreHuaweiJar == null) {
+            logger.info("pinpoint-bootstrap-core-huawei-x.x.x(-SNAPSHOT).jar not found");
+        }
     }
 
     public String getCommons() {
@@ -94,6 +101,10 @@ public class BootDir {
 
     public String getBootstrapCore() {
         return bootstrapCore;
+    }
+
+    public String getBootStrapCoreHuawei() {
+        return bootStrapCoreHuawei;
     }
 
     public String getBootstrapCoreOptional() {
@@ -116,7 +127,7 @@ public class BootDir {
         addFilePath(list, bootstrapCoreOptional, false);
         addFilePath(list, bootstrapJava9, false);
         addFilePath(list, annotations, false);
-
+        addFilePath(list, bootStrapCoreHuawei, true);
         return list;
     }
 
@@ -141,7 +152,7 @@ public class BootDir {
         addJarFile(jarFileList, bootstrapCoreOptional, false);
         addJarFile(jarFileList, bootstrapJava9, false);
         addJarFile(jarFileList, annotations, false);
-
+        addJarFile(jarFileList, bootStrapCoreHuawei, true);
         return jarFileList;
     }
 

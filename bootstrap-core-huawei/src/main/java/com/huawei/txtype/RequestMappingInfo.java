@@ -1,11 +1,12 @@
 package com.huawei.txtype;
 
+import com.navercorp.pinpoint.bootstrap.context.huawei.IRequestMappingInfo;
 import com.navercorp.pinpoint.bootstrap.util.AntPathMatcher;
 
 import java.util.HashSet;
 import java.util.Set;
 
-public class RequestMappingInfo {
+public class RequestMappingInfo implements IRequestMappingInfo {
 
     private AntPathMatcher antPathMatcher;
     private Set<String> methods;
@@ -30,6 +31,10 @@ public class RequestMappingInfo {
 
     public boolean match(String uri, String method) {
         return methods.contains(method) && antPathMatcher.isMatched(uri);
+    }
+
+    public String getTxtype(){
+        return pattern;
     }
 
     @Override

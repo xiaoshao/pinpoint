@@ -1,8 +1,8 @@
 package com.huawei.txtype.impl;
 
-import com.huawei.txtype.IMappingRegistry;
-import com.huawei.txtype.RequestMappingInfo;
 import com.huawei.txtype.impl.springmvc.SpringMVCMappingRegistryFactory;
+import com.navercorp.pinpoint.bootstrap.context.huawei.IMappingRegistry;
+import com.navercorp.pinpoint.bootstrap.context.huawei.IRequestMappingInfo;
 
 import java.util.Collection;
 import java.util.List;
@@ -17,11 +17,11 @@ public class MVCRegistryMapping extends DefaultRegistryMapping implements IMappi
 
 
     @Override
-    public RequestMappingInfo match(String uri, String method) {
+    public IRequestMappingInfo match(String uri, String method) {
         if (registries != null) {
 
             for (IMappingRegistry registry : registries) {
-                RequestMappingInfo requestMappingInfo = registry.match(uri, method);
+                IRequestMappingInfo requestMappingInfo = registry.match(uri, method);
                 if (requestMappingInfo != null) {
                     return requestMappingInfo;
                 }
@@ -31,9 +31,8 @@ public class MVCRegistryMapping extends DefaultRegistryMapping implements IMappi
         return null;
     }
 
-
     @Override
-    public void register(RequestMappingInfo requestMappingInfo, int level) {
+    public void register(IRequestMappingInfo requestMappingInfo, int level) {
         if (level <= 0) {
             return;
         }
@@ -45,7 +44,7 @@ public class MVCRegistryMapping extends DefaultRegistryMapping implements IMappi
     }
 
     @Override
-    public void register(Collection<RequestMappingInfo> requestMappingInfos, int level) {
+    public void register(Collection<IRequestMappingInfo> requestMappingInfos, int level) {
         if (level <= 0) {
             return;
         }

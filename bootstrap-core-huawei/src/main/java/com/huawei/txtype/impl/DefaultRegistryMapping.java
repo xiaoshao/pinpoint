@@ -1,6 +1,6 @@
 package com.huawei.txtype.impl;
 
-import com.huawei.txtype.RequestMappingInfo;
+import com.navercorp.pinpoint.bootstrap.context.huawei.IRequestMappingInfo;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -8,28 +8,28 @@ import java.util.List;
 
 public class DefaultRegistryMapping {
 
-    private List<RequestMappingInfo> requestMappingInfos = new ArrayList<RequestMappingInfo>();
+    private List<IRequestMappingInfo> requestMappingInfos = new ArrayList<IRequestMappingInfo>();
 
 
-    protected void register(RequestMappingInfo requestMappingInfo) {
+    protected void register(IRequestMappingInfo requestMappingInfo) {
         requestMappingInfos.add(requestMappingInfo);
     }
 
-    protected void register(Collection<RequestMappingInfo> requestMappingInfos){
+    protected void register(Collection<IRequestMappingInfo> requestMappingInfos){
         this.requestMappingInfos.addAll(requestMappingInfos);;
     }
 
-    public RequestMappingInfo match(String uri, String method) {
+    public IRequestMappingInfo match(String uri, String method) {
         return this.match(requestMappingInfos, uri, method);
     }
 
-    protected RequestMappingInfo match(List<RequestMappingInfo> requestMappingInfos, String uri, String method){
+    protected IRequestMappingInfo match(List<IRequestMappingInfo> requestMappingInfos, String uri, String method){
 
         if(requestMappingInfos == null){
             return null;
         }
 
-        for (RequestMappingInfo requestMappingInfo : requestMappingInfos) {
+        for (IRequestMappingInfo requestMappingInfo : requestMappingInfos) {
             if (requestMappingInfo.match(uri, method)) {
                 return requestMappingInfo;
             }
