@@ -148,7 +148,7 @@ public class ActiveMQMessageConsumerDispatchInterceptor implements AroundInterce
         }
 
         final TraceId traceId = populateTraceIdFromRequest(message);
-        final Trace trace = traceId == null ? traceContext.newTraceObject() : traceContext.continueTraceObject(traceId);
+        final Trace trace = traceId == null ? traceContext.newTraceObject("") : traceContext.continueTraceObject(traceId);
         if (trace.canSampled()) {
             SpanRecorder recorder = trace.getSpanRecorder();
             recordRootSpan(recorder, target, args);

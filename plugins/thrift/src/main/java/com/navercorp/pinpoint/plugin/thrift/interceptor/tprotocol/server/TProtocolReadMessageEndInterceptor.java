@@ -178,7 +178,7 @@ public class TProtocolReadMessageEndInterceptor implements AroundInterceptor {
             return trace;
         } else {
             // No parent trace info, start new trace
-            final Trace trace = traceContext.newTraceObject();
+            final Trace trace = traceContext.newTraceObject("");
             if (trace.canSampled()) {
                 recordRootSpan(trace, parentTraceInfo, target);
                 if (isDebug) {

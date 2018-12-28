@@ -118,7 +118,7 @@ public class MethodInvocationHandlerInterceptor implements AroundInterceptor {
                 logger.error("An error occurred while fetching method details", exception);
             }
         }
-        final Trace trace = traceContext.newTraceObject();
+        final Trace trace = traceContext.newTraceObject("");
         final Connection connection = RemotingContext.getConnection();
         final String remoteAddress = JbossUtility.fetchRemoteAddress(connection);
         if (trace.canSampled()) {

@@ -85,17 +85,17 @@ public class LoggingBaseTraceFactory implements BaseTraceFactory {
     }
 
     @Override
-    public Trace newTraceObject() {
+    public Trace newTraceObject(String txtype) {
         logger.debug("newTraceObject()");
 
-        return baseTraceFactory.newTraceObject();
+        return baseTraceFactory.newTraceObject(txtype);
     }
 
     @Override
     @InterfaceAudience.LimitedPrivate("vert.x")
-    public Trace newAsyncTraceObject() {
+    public Trace newAsyncTraceObject(String txtype) {
         logger.debug("newAsyncTraceObject()");
 
-        return baseTraceFactory.newAsyncTraceObject();
+        return baseTraceFactory.newAsyncTraceObject(txtype);
     }
 }

@@ -46,11 +46,11 @@ public class DefaultTraceRootFactory implements TraceRootFactory {
     }
 
     @Override
-    public TraceRoot newTraceRoot() {
+    public TraceRoot newTraceRoot(String txtype) {
         final long localTransactionId = idGenerator.nextTransactionId();
         final TraceId traceId = traceIdFactory.newTraceId(localTransactionId);
         final long startTime = traceStartTime();
-        return new DefaultTraceRoot(traceId, this.agentId, startTime, localTransactionId);
+        return new DefaultTraceRoot(traceId, this.agentId, startTime, localTransactionId, txtype);
     }
 
     private long traceStartTime() {
@@ -65,6 +65,6 @@ public class DefaultTraceRootFactory implements TraceRootFactory {
         }
         final long startTime = traceStartTime();
         final long continuedTransactionId = this.idGenerator.nextContinuedTransactionId();
-        return new DefaultTraceRoot(traceId, this.agentId, startTime, continuedTransactionId);
+        return new DefaultTraceRoot(traceId, this.agentId, startTime, continuedTransactionId, null);
     }
 }

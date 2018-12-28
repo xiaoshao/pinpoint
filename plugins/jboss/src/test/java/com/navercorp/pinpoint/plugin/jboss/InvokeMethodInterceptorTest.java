@@ -121,12 +121,12 @@ public class InvokeMethodInterceptorTest {
         interceptor.before("target", new Object[] { request, response });
         interceptor.after("target", new Object[] { request, response }, new Object(), null);
 
-        verify(traceContext, times(1)).newAsyncTraceObject();
+        verify(traceContext, times(1)).newAsyncTraceObject("/**");
 
         interceptor.before("target", new Object[] { request, response });
         interceptor.after("target", new Object[] { request, response }, new Object(), null);
 
-        verify(traceContext, times(2)).newAsyncTraceObject();
+        verify(traceContext, times(2)).newAsyncTraceObject("/**");
     }
 
     /**
@@ -151,7 +151,7 @@ public class InvokeMethodInterceptorTest {
         interceptor.before("target", new Object[] { request, response });
         interceptor.after("target", new Object[] { request, response }, new Object(), null);
 
-        verify(traceContext, never()).newTraceObject();
+        verify(traceContext, never()).newTraceObject("");
         verify(traceContext, never()).disableSampling();
         verify(traceContext, never()).continueTraceObject(any(TraceId.class));
 
@@ -159,7 +159,7 @@ public class InvokeMethodInterceptorTest {
         interceptor.before("target", new Object[] { request, response });
         interceptor.after("target", new Object[] { request, response }, new Object(), null);
 
-        verify(traceContext, never()).newTraceObject();
+        verify(traceContext, never()).newTraceObject("");
         verify(traceContext, never()).disableSampling();
         verify(traceContext, never()).continueTraceObject(any(TraceId.class));
     }
@@ -180,6 +180,7 @@ public class InvokeMethodInterceptorTest {
         when(request.getHeader(Header.HTTP_SPAN_ID.toString())).thenReturn("SPANID");
         when(request.getHeader(Header.HTTP_SAMPLED.toString())).thenReturn("false");
         when(request.getHeader(Header.HTTP_FLAGS.toString())).thenReturn("0");
+        when(request.getHeader(Header.HTTP_TXTYPE.toString())).thenReturn("ALL_/**");
         final Enumeration<?> enumeration = mock(Enumeration.class);
         when(request.getParameterNames()).thenReturn((Enumeration<String>) enumeration);
 

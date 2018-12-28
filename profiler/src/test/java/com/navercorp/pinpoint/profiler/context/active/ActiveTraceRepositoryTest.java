@@ -146,7 +146,7 @@ public class ActiveTraceRepositoryTest {
             public TraceThreadTuple call() throws Exception {
                 try {
                     long id = Thread.currentThread().getId();
-                    return new TraceThreadTuple(traceContext.newTraceObject(), id);
+                    return new TraceThreadTuple(traceContext.newTraceObject("ALL_/**"), id);
                 } finally {
                     executeLatch.countDown();
                     awaitLatch.await();

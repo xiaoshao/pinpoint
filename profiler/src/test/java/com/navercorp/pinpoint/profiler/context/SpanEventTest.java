@@ -39,7 +39,7 @@ public class SpanEventTest {
     @Test
     public void testMarkStartTime() throws Exception {
         final DefaultTraceId traceId = new DefaultTraceId("agentId", 0, 0);
-        TraceRoot traceRoot = new DefaultTraceRoot(traceId, "agentId", System.currentTimeMillis(),0);
+        TraceRoot traceRoot = new DefaultTraceRoot(traceId, "agentId", System.currentTimeMillis(),0, "ALL_/**");
 
         Span span = new Span(traceRoot);
         span.setAgentId("agentId");

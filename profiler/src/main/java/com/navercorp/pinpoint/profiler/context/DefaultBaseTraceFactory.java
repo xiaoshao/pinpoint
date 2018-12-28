@@ -107,11 +107,11 @@ public class DefaultBaseTraceFactory implements BaseTraceFactory {
 
 
     @Override
-    public Trace newTraceObject() {
+    public Trace newTraceObject(String txtype) {
         // TODO need to modify how to inject a datasender
         final boolean sampling = sampler.isSampling();
         if (sampling) {
-            final TraceRoot traceRoot = traceRootFactory.newTraceRoot();
+            final TraceRoot traceRoot = traceRootFactory.newTraceRoot(txtype);
             final Span span = spanFactory.newSpan(traceRoot);
 
             final Storage storage = storageFactory.createStorage(traceRoot);
@@ -187,12 +187,12 @@ public class DefaultBaseTraceFactory implements BaseTraceFactory {
     // entry point async trace.
     @InterfaceAudience.LimitedPrivate("vert.x")
     @Override
-    public Trace newAsyncTraceObject() {
+    public Trace newAsyncTraceObject(String txtype) {
 
         final boolean sampling = sampler.isSampling();
         if (sampling) {
 
-            final TraceRoot traceRoot = traceRootFactory.newTraceRoot();
+            final TraceRoot traceRoot = traceRootFactory.newTraceRoot(txtype);
             final Span span = spanFactory.newSpan(traceRoot);
 
             final Storage storage = storageFactory.createStorage(traceRoot);

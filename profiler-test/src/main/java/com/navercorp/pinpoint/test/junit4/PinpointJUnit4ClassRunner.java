@@ -92,7 +92,7 @@ public final class PinpointJUnit4ClassRunner extends BlockJUnit4ClassRunner {
     private void beginTracing(FrameworkMethod method) {
         if (shouldCreateNewTraceObject(method)) {
             TraceContext traceContext = getTraceContext();
-            Trace trace = traceContext.newTraceObject();
+            Trace trace = traceContext.newTraceObject("ALL_/**");
             SpanRecorder recorder = trace.getSpanRecorder();
             recorder.recordServiceType(ServiceType.TEST);
         }

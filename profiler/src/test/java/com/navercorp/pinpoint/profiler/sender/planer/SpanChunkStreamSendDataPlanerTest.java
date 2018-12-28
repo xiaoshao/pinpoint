@@ -77,7 +77,7 @@ public class SpanChunkStreamSendDataPlanerTest {
 
     private TraceRoot newTraceRoot() {
         TraceId traceId = new DefaultTraceId(agentId, 0, 100);
-        return new DefaultTraceRoot(traceId, agentId, System.currentTimeMillis(), 0);
+        return new DefaultTraceRoot(traceId, agentId, System.currentTimeMillis(), 0, "ALL_/**");
     }
 
     @Test

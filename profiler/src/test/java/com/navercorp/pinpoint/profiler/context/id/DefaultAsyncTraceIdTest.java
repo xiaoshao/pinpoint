@@ -38,7 +38,7 @@ public class DefaultAsyncTraceIdTest {
         long agentStartTime = System.currentTimeMillis();
         String testAgentId = "testAgentId";
         TraceId traceId = new DefaultTraceId(testAgentId, agentStartTime, 0);
-        TraceRoot traceRoot = new DefaultTraceRoot(traceId, testAgentId, agentStartTime + 10, 2);
+        TraceRoot traceRoot = new DefaultTraceRoot(traceId, testAgentId, agentStartTime + 10, 2, "ALL_/**");
         AsyncId asyncId = new DefaultAsyncId(0);
         AsyncTraceId asyncTraceId = new DefaultAsyncTraceId(traceRoot, asyncId);
 

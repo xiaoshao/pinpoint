@@ -142,14 +142,14 @@ public class DefaultTraceContext implements TraceContext {
 
 
     @Override
-    public Trace newTraceObject() {
-        return traceFactory.newTraceObject();
+    public Trace newTraceObject(String txtype) {
+        return traceFactory.newTraceObject(txtype);
     }
 
     @InterfaceAudience.LimitedPrivate("vert.x")
     @Override
-    public Trace newAsyncTraceObject() {
-        return traceFactory.newAsyncTraceObject();
+    public Trace newAsyncTraceObject(String txtype) {
+        return traceFactory.newAsyncTraceObject(txtype);
     }
 
     @InterfaceAudience.LimitedPrivate("vert.x")

@@ -42,14 +42,14 @@ public interface TraceContext {
 
     Trace continueTraceObject(Trace trace);
 
-    Trace newTraceObject();
+    Trace newTraceObject(String txtype);
 
     /**
      * internal experimental api
      */
     @InterfaceStability.Evolving
     @InterfaceAudience.LimitedPrivate("vert.x")
-    Trace newAsyncTraceObject();
+    Trace newAsyncTraceObject(String txtype);
 
     /**
      * internal experimental api

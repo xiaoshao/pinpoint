@@ -819,7 +819,7 @@ public class PluginVerifierExternalAdaptor implements PluginTestVerifier {
     public void initialize(boolean createTraceObject) {
         if (createTraceObject) {
             final TraceContext traceContext = getTraceContext();
-            traceContext.newTraceObject();
+            traceContext.newTraceObject("ALL_/**");
         }
 
         getRecorder().clear();

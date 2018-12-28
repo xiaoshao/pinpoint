@@ -132,8 +132,8 @@ public class RequestTraceReader<T> {
 
     private Trace newTrace(String txType) {
         if (this.async) {
-            return this.traceContext.newAsyncTraceObject();
+            return this.traceContext.newAsyncTraceObject(txType);
         }
-        return this.traceContext.newTraceObject();
+        return this.traceContext.newTraceObject(txType);
     }
 }

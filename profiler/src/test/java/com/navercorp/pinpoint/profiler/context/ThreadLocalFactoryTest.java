@@ -24,6 +24,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -47,7 +48,7 @@ public abstract class ThreadLocalFactoryTest {
         when(disable.canSampled()).thenReturn(false);
 
         final BaseTraceFactory baseTraceFactory = mock(BaseTraceFactory.class);
-        when(baseTraceFactory.newTraceObject()).thenReturn(trace);
+        when(baseTraceFactory.newTraceObject(anyString())).thenReturn(trace);
         when(baseTraceFactory.disableSampling()).thenReturn(disable);
 
         Binder<Trace> binder = new ThreadLocalBinder<Trace>();
@@ -72,7 +73,7 @@ public abstract class ThreadLocalFactoryTest {
         Trace rawTraceObject = traceFactory.currentRawTraceObject();
         Assert.assertNull(rawTraceObject);
 
-        traceFactory.newTraceObject();
+        traceFactory.newTraceObject("ALL_/**");
         Assert.assertNotNull(traceFactory.currentRawTraceObject());
     }
 
@@ -81,7 +82,7 @@ public abstract class ThreadLocalFactoryTest {
     public void testCurrentTraceObject() throws Exception {
         TraceFactory traceFactory = sampledTraceFactory;
 
-        Trace newTrace = traceFactory.newTraceObject();
+        Trace newTrace = traceFactory.newTraceObject("ALL_/**");
         Trace currentTrace = traceFactory.currentTraceObject();
 
         Assert.assertNotNull(currentTrace);
@@ -92,7 +93,7 @@ public abstract class ThreadLocalFactoryTest {
     public void testCurrentTraceObject_unsampled() throws Exception {
         TraceFactory traceFactory = unsampledTraceFactory;
 
-        Trace newTrace = traceFactory.newTraceObject();
+        Trace newTrace = traceFactory.newTraceObject("ALL_/**");
         Trace currentTrace = traceFactory.currentTraceObject();
 
         Assert.assertNull(currentTrace);
@@ -104,7 +105,7 @@ public abstract class ThreadLocalFactoryTest {
     public void testCurrentRawTraceObject() throws Exception {
         TraceFactory traceFactory = sampledTraceFactory;
 
-        Trace trace = traceFactory.newTraceObject();
+        Trace trace = traceFactory.newTraceObject("ALL_/**");
         Trace rawTrace = traceFactory.currentRawTraceObject();
 
         Assert.assertNotNull(rawTrace);
@@ -115,7 +116,7 @@ public abstract class ThreadLocalFactoryTest {
     public void testCurrentRawTraceObject_unsampled() throws Exception {
         TraceFactory traceFactory = unsampledTraceFactory;
 
-        Trace trace = traceFactory.newTraceObject();
+        Trace trace = traceFactory.newTraceObject("ALL_/**");
         Trace rawTrace = traceFactory.currentRawTraceObject();
 
         Assert.assertNotNull(rawTrace);
@@ -142,7 +143,7 @@ public abstract class ThreadLocalFactoryTest {
     public void testNewTraceObject() throws Exception {
         TraceFactory traceFactory = sampledTraceFactory;
 
-        traceFactory.newTraceObject();
+        traceFactory.newTraceObject("ALL_/**");
         Trace rawTraceObject = traceFactory.currentRawTraceObject();
         Assert.assertNotNull(rawTraceObject);
 
@@ -153,8 +154,8 @@ public abstract class ThreadLocalFactoryTest {
     public void duplicatedTraceStart() {
         TraceFactory traceFactory = sampledTraceFactory;
 
-        traceFactory.newTraceObject();
-        traceFactory.newTraceObject();
+        traceFactory.newTraceObject("ALL_/**");
+        traceFactory.newTraceObject("ALL_/**");
 
     }
 
@@ -162,7 +163,7 @@ public abstract class ThreadLocalFactoryTest {
     public void testDetachTraceObject() throws Exception {
         TraceFactory traceFactory = this.sampledTraceFactory;
 
-        traceFactory.newTraceObject();
+        traceFactory.newTraceObject("ALL_/**");
         traceFactory.removeTraceObject();
 
         Trace rawTraceObject = traceFactory.currentRawTraceObject();

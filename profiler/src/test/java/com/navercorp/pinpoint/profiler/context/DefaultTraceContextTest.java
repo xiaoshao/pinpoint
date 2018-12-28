@@ -95,7 +95,7 @@ public class DefaultTraceContextTest {
     public void threadLocalBindTest() {
 
         TraceContext traceContext = applicationContext.getTraceContext();
-        Assert.assertNotNull(traceContext.newTraceObject());
+        Assert.assertNotNull(traceContext.newTraceObject("ALL_/**"));
 
         ProfilerConfig profilerConfig = getProfilerConfig();
 
@@ -137,7 +137,7 @@ public class DefaultTraceContextTest {
         final long expectedSampledNewCount = newTransactionCount / samplingRate + (newTransactionCount % samplingRate > 0 ? 1 : 0);
         final long expectedUnsampledNewCount = newTransactionCount - expectedSampledNewCount;
         for (int i = 0; i < newTransactionCount; i++) {
-            traceContext.newTraceObject();
+            traceContext.newTraceObject("ALL_/txtype");
             traceContext.removeTraceObject();
         }
         

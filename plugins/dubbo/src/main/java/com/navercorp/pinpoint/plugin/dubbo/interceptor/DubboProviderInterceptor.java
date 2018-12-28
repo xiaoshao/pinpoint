@@ -55,7 +55,7 @@ public class DubboProviderInterceptor extends SpanRecursiveAroundInterceptor {
         // FIXME There seems to be cases where the invoke method is called after a span is already created.
         // We'll have to check if a trace object already exists and create a span event instead of a span in that case.
         if (transactionId == null) {
-            return traceContext.newTraceObject();
+            return traceContext.newTraceObject("");
         }
 
         // otherwise, continue tracing with given data.

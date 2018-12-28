@@ -91,17 +91,17 @@ public class DefaultTransactionIdEncoderTest {
 
     private TraceRoot getRootTraceId() {
         TraceId traceId = new DefaultTraceId(agentId, agentStartTime, transactionId2);
-        return new DefaultTraceRoot(traceId, agentId, agentStartTime, transactionId);
+        return new DefaultTraceRoot(traceId, agentId, agentStartTime, transactionId, "ALL_/**");
     }
 
     private TraceRoot getExternalTraceId() {
         TraceId traceId = new DefaultTraceId(agentId2, agentStartTime2, transactionId2);
-        return new DefaultTraceRoot(traceId, agentId, agentStartTime, transactionId);
+        return new DefaultTraceRoot(traceId, agentId, agentStartTime, transactionId, "ALL_/**");
     }
 
     private TraceRoot getDuplicateAgentId() {
         TraceId traceId = new DefaultTraceId(agentId, agentStartTime2, transactionId2);
-        return new DefaultTraceRoot(traceId, agentId, agentStartTime, transactionId);
+        return new DefaultTraceRoot(traceId, agentId, agentStartTime, transactionId, "ALL_/**");
     }
 
 

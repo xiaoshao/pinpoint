@@ -36,8 +36,8 @@ public interface BaseTraceFactory {
 
     Trace continueAsyncTraceObject(TraceRoot traceRoot, int asyncId, short asyncSequence);
 
-    Trace newTraceObject();
+    Trace newTraceObject(String txtype);
 
     @InterfaceAudience.LimitedPrivate("vert.x")
-    Trace newAsyncTraceObject();
+    Trace newAsyncTraceObject(String txtype);
 }

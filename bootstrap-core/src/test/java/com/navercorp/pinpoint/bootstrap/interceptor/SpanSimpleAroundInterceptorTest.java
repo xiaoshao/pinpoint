@@ -88,7 +88,7 @@ public class SpanSimpleAroundInterceptorTest {
 
         TraceContext traceContext = mock(TraceContext.class);
         when(traceContext.currentRawTraceObject()).thenAnswer(answer);
-        when(traceContext.newTraceObject()).thenAnswer(answer);
+        when(traceContext.newTraceObject(anyString())).thenAnswer(answer);
         when(traceContext.removeTraceObject()).thenAnswer(answer);
         return traceContext;
     }
@@ -137,7 +137,7 @@ public class SpanSimpleAroundInterceptorTest {
     @Test
     public void traceCreateFail() {
         TraceContext context = mock(TraceContext.class);
-        when(context.newTraceObject()).thenReturn(null);
+        when(context.newTraceObject(anyString())).thenReturn(null);
 
         TestSpanSimpleAroundInterceptor interceptor = new TestSpanSimpleAroundInterceptor(context);
 
@@ -192,7 +192,7 @@ public class SpanSimpleAroundInterceptorTest {
 
         @Override
         protected Trace createTrace(Object target, Object[] args) {
-            return traceContext.newTraceObject();
+            return traceContext.newTraceObject("ALL_/**");
         }
 
         @Override

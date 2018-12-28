@@ -109,9 +109,9 @@ public class DefaultTraceFactory implements TraceFactory {
     }
 
     @Override
-    public Trace newTraceObject() {
+    public Trace newTraceObject(String txtype) {
         final Reference<Trace> reference = checkAndGet();
-        final Trace trace = this.baseTraceFactory.newTraceObject();
+        final Trace trace = this.baseTraceFactory.newTraceObject(txtype);
 
         bind(reference, trace);
         return trace;
@@ -145,10 +145,10 @@ public class DefaultTraceFactory implements TraceFactory {
     // entry point async trace.
     @InterfaceAudience.LimitedPrivate("vert.x")
     @Override
-    public Trace newAsyncTraceObject() {
+    public Trace newAsyncTraceObject(String txtype) {
         final Reference<Trace> reference = checkAndGet();
 
-        final Trace trace = this.baseTraceFactory.newAsyncTraceObject();
+        final Trace trace = this.baseTraceFactory.newAsyncTraceObject(txtype);
 
         bind(reference, trace);
         return trace;

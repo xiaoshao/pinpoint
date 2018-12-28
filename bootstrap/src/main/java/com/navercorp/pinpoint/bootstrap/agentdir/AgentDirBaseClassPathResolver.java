@@ -140,7 +140,7 @@ public class AgentDirBaseClassPathResolver implements ClassPathResolver {
         String bootStrapJava9Jar = find(bootDirPath, "pinpoint-bootstrap-java9.jar", agentJava9Pattern);
         String bootStrapCoreOptionalJar = find(bootDirPath, "pinpoint-bootstrap-core-optional.jar", agentCoreOptionalPattern);
         String annotationsJar = find(bootDirPath,"pinpoint-annotations.jar", annotationsPattern);
-        String bootStrapCoreHuaweiJar = find(bootDirPath, "pinpoint-bootstrap-core.jar", agentCoreHuaweiPattern);
+        String bootStrapCoreHuaweiJar = find(bootDirPath, "pinpoint-bootstrap-core-huawei.jar", agentCoreHuaweiPattern);
         return new BootDir(pinpointCommonsJar, bootStrapCoreJar, bootStrapCoreOptionalJar, bootStrapJava9Jar, annotationsJar, bootStrapCoreHuaweiJar);
     }
 

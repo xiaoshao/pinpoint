@@ -23,7 +23,7 @@ import com.navercorp.pinpoint.bootstrap.context.TraceId;
  */
 public interface TraceRootFactory {
 
-    TraceRoot newTraceRoot();
+    TraceRoot newTraceRoot(String txtype);
 
     TraceRoot continueTraceRoot(TraceId traceId);
 }

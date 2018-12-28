@@ -262,7 +262,7 @@ public class ConsumerRecordEntryPointInterceptor implements AroundInterceptor {
             }
 
             Trace createTrace0(TraceContext traceContext, ConsumerRecord consumerRecord) {
-                final Trace trace = traceContext.newTraceObject();
+                final Trace trace = traceContext.newTraceObject("");
                 if (trace.canSampled()) {
                     final SpanRecorder recorder = trace.getSpanRecorder();
                     recordRootSpan(recorder, consumerRecord);

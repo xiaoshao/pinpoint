@@ -31,13 +31,14 @@ public class DefaultTraceRoot implements TraceRoot {
     private final long traceStartTime;
 
     private final Shared shared = new DefaultShared();
+    private final String txtype;
 
-
-    public DefaultTraceRoot(TraceId traceId, String agentId, long traceStartTime, long localTransactionId) {
+    public DefaultTraceRoot(TraceId traceId, String agentId, long traceStartTime, long localTransactionId, String txtype) {
         this.traceId = Assert.requireNonNull(traceId, "traceId must not be null");
         this.agentId = Assert.requireNonNull(agentId, "agentId must not be null");
         this.traceStartTime = traceStartTime;
         this.localTransactionId = localTransactionId;
+        this.txtype = txtype;
     }
 
     @Override
@@ -64,13 +65,17 @@ public class DefaultTraceRoot implements TraceRoot {
         return shared;
     }
 
-
+    @Override
+    public String getTxtype() {
+        return txtype;
+    }
 
 
     @Override
     public String toString() {
         return "DefaultTraceRoot{" +
                 "traceId=" + traceId +
+                ", txtype=" + txtype +
                 ", agentId='" + agentId + '\'' +
                 ", traceStartTime=" + traceStartTime +
                 '}';

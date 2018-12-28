@@ -66,6 +66,6 @@ public class SpanChunkFactoryTest {
 
     private TraceRoot newInternalTraceId() {
         TraceId traceId = new DefaultTraceId(agentId, agentStartTime, 100);
-        return new DefaultTraceRoot(traceId, agentId, agentStartTime, 0);
+        return new DefaultTraceRoot(traceId, agentId, agentStartTime, 0, "ALL_/**");
     }
 }

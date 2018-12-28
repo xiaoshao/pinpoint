@@ -68,8 +68,8 @@ public class MetricTraceFactory implements TraceFactory {
     }
 
     @Override
-    public Trace newAsyncTraceObject() {
-        return delegate.newAsyncTraceObject();
+    public Trace newAsyncTraceObject(String txtype) {
+        return delegate.newAsyncTraceObject(txtype);
     }
 
     @Override
@@ -79,8 +79,8 @@ public class MetricTraceFactory implements TraceFactory {
 
 
     @Override
-    public Trace newTraceObject() {
-        return delegate.newTraceObject();
+    public Trace newTraceObject(String txtype) {
+        return delegate.newTraceObject(txtype);
     }
 
     @Override

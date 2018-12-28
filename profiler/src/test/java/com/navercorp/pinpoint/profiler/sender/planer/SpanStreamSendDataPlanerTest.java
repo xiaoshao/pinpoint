@@ -86,7 +86,7 @@ public class SpanStreamSendDataPlanerTest {
     private Span createSpan(List<SpanEvent> spanEventList) {
         final String agentId = "agentId";
         TraceId traceId = new DefaultTraceId(agentId, 0, 1);
-        TraceRoot traceRoot = new DefaultTraceRoot(traceId, agentId, System.currentTimeMillis(), 0);
+        TraceRoot traceRoot = new DefaultTraceRoot(traceId, agentId, System.currentTimeMillis(), 0, "ALL_/**");
 
         Span span = new Span(traceRoot);
         for (SpanEvent spanEvent : spanEventList) {

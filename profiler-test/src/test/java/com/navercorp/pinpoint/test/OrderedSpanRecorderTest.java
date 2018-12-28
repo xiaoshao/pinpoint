@@ -63,7 +63,7 @@ public class OrderedSpanRecorderTest {
         final long spanId = 1L;
 
         TraceId traceId = new DefaultTraceId(agentId, startTime, 0,-1L, spanId, (short)0);
-        final TraceRoot traceRoot = new DefaultTraceRoot(traceId, agentId, startTime, 0);
+        final TraceRoot traceRoot = new DefaultTraceRoot(traceId, agentId, startTime, 0, "ALL/**");
 
 
         Span span = createSpan(traceRoot, startTime, spanId);
@@ -109,13 +109,13 @@ public class OrderedSpanRecorderTest {
         final long startTime1 = System.currentTimeMillis();
         final long spanId = 1L;
         TraceId traceId1 = new DefaultTraceId(agentId, startTime1, 0,-1L, spanId, (short)0);
-        final TraceRoot traceRoot1 = new DefaultTraceRoot(traceId1, agentId, startTime1, 0);
+        final TraceRoot traceRoot1 = new DefaultTraceRoot(traceId1, agentId, startTime1, 0, "ALL_/**");
 
 
         final long startTime2 = startTime1 + 10L;
         final long spanId2 = 2L;
         final TraceId traceId2 = new DefaultTraceId(agentId, startTime2, 0,-1L, spanId2, (short)0);
-        final TraceRoot traceRoot2 = new DefaultTraceRoot(traceId2, agentId, startTime2, 0);
+        final TraceRoot traceRoot2 = new DefaultTraceRoot(traceId2, agentId, startTime2, 0, "ALL_/**");
 
 
         Span span = createSpan(traceRoot1, startTime1, spanId);
@@ -163,12 +163,12 @@ public class OrderedSpanRecorderTest {
         final long startTime1 = System.currentTimeMillis();
         final long spanId1 = 1L;
         final TraceId traceId1 = new DefaultTraceId(agentId, startTime1, 0,-1L, spanId1, (short)0);
-        final TraceRoot traceRoot1 = new DefaultTraceRoot(traceId1, agentId, startTime1, 0);
+        final TraceRoot traceRoot1 = new DefaultTraceRoot(traceId1, agentId, startTime1, 0, "ALL_/**");
 
         final long startTime2 = startTime1 + 10L;
         final long spanId2 = 2L;
         final TraceId traceId2 = new DefaultTraceId(agentId, startTime2, 0,-1L, spanId2, (short)0);
-        final TraceRoot traceRoot2 = new DefaultTraceRoot(traceId2, agentId, startTime2, 0);
+        final TraceRoot traceRoot2 = new DefaultTraceRoot(traceId2, agentId, startTime2, 0, "ALL_/**");
 
         Span span1 = createSpan(traceRoot1, startTime1, spanId1);
         SpanEvent event1_0 = createSpanEvent(traceRoot1, 1, (short) 0);

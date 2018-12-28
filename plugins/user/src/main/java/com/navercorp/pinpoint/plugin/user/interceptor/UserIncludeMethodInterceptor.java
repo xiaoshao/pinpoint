@@ -123,7 +123,7 @@ public class UserIncludeMethodInterceptor implements AroundInterceptor {
     }
 
     private Trace createUserIncludeTrace() {
-        final Trace trace = traceContext.newTraceObject();
+        final Trace trace = traceContext.newTraceObject("");
         if (isDebug) {
             logger.debug("New user include trace {} and sampled {}", trace, trace.canSampled());
         }

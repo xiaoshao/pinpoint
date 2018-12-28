@@ -31,4 +31,6 @@ public interface TraceRoot {
 
     Shared getShared();
 
+    String getTxtype();
+
 }

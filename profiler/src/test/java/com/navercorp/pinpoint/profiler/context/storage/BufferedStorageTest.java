@@ -56,7 +56,7 @@ public class BufferedStorageTest {
 
     private TraceRoot newInternalTraceId() {
         TraceId traceId = new DefaultTraceId(agentId, agentStartTime, 100);
-        return new DefaultTraceRoot(traceId, agentId, agentStartTime, 100);
+        return new DefaultTraceRoot(traceId, agentId, agentStartTime, 100, "ALL_/**");
     }
 
     @Test

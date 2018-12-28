@@ -71,7 +71,7 @@ public class TraceTest {
     public void trace() {
 
         final TraceId traceId = new DefaultTraceId(agentId, agentStartTime, 1);
-        final TraceRoot traceRoot = new DefaultTraceRoot(traceId, agentId, traceStartTime, 0);
+        final TraceRoot traceRoot = new DefaultTraceRoot(traceId, agentId, traceStartTime, 0, "ALL_/**");
 
         final CallStack callStack = newCallStack(traceRoot);
         final Span span = newSpan(traceRoot);
@@ -103,7 +103,7 @@ public class TraceTest {
     public void popEventTest() {
 
         final TraceId traceId = new DefaultTraceId(agentId, agentStartTime, 1);
-        final TraceRoot traceRoot = new DefaultTraceRoot(traceId, agentId, traceStartTime, 0);
+        final TraceRoot traceRoot = new DefaultTraceRoot(traceId, agentId, traceStartTime, 0, "ALL_/**");
 
         final CallStack callStack = newCallStack(traceRoot);
 

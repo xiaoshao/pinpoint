@@ -21,6 +21,8 @@ import com.navercorp.pinpoint.bootstrap.context.Header;
 import com.navercorp.pinpoint.bootstrap.context.Trace;
 import com.navercorp.pinpoint.bootstrap.context.TraceContext;
 import com.navercorp.pinpoint.bootstrap.context.TraceId;
+import com.navercorp.pinpoint.bootstrap.context.huawei.IMappingRegistry;
+import com.navercorp.pinpoint.bootstrap.context.huawei.IRequestMappingInfo;
 import org.junit.Test;
 
 import static org.mockito.ArgumentMatchers.anyLong;
@@ -28,6 +30,7 @@ import static org.mockito.ArgumentMatchers.anyShort;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.mockingDetails;
 import static org.mockito.Mockito.when;
 
 import static org.junit.Assert.*;
@@ -49,13 +52,20 @@ public class RequestWrapperReaderTest {
 
         // new trace
         Trace newTrace = mock(Trace.class);
+
+        IRequestMappingInfo requestMappingInfo = mock(IRequestMappingInfo.class);
+        when(requestMappingInfo.getTxtype()).thenReturn("ALL_/**");
+
+        IMappingRegistry mappingRegistry = mock(IMappingRegistry.class);
+        when(mappingRegistry.match(null, null)).thenReturn(requestMappingInfo);
         when(newTrace.canSampled()).thenReturn(Boolean.TRUE);
 
         TraceContext traceContext = mock(TraceContext.class);
         when(traceContext.disableSampling()).thenReturn(disableTrace);
         when(traceContext.continueTraceObject(any(TraceId.class))).thenReturn(continueTrace);
-        when(traceContext.newTraceObject()).thenReturn(newTrace);
+        when(traceContext.newTraceObject(anyString())).thenReturn(newTrace);
         when(traceContext.getProfilerConfig()).thenReturn(new DefaultProfilerConfig());
+        when(traceContext.getMappingRegistry()).thenReturn(mappingRegistry);
 
         TraceId traceId = mock(TraceId.class);
         when(traceContext.createTraceId(anyString(), anyLong(), anyLong(), anyShort())).thenReturn(traceId);
@@ -73,6 +83,7 @@ public class RequestWrapperReaderTest {
         when(continueServerRequestWrapper.getHeader(Header.HTTP_PARENT_SPAN_ID.toString())).thenReturn("1");
         when(continueServerRequestWrapper.getHeader(Header.HTTP_SPAN_ID.toString())).thenReturn("1");
         when(continueServerRequestWrapper.getHeader(Header.HTTP_FLAGS.toString())).thenReturn("1");
+        when(continueServerRequestWrapper.getHeader(Header.HTTP_TXTYPE.toString())).thenReturn("ALL_/**");
         assertEquals(continueTrace, reader.read(continueServerRequestWrapper));
 
         // new trace

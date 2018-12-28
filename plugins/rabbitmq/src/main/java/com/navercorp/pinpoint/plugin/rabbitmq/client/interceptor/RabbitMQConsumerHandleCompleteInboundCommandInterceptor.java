@@ -165,7 +165,7 @@ public class RabbitMQConsumerHandleCompleteInboundCommandInterceptor implements 
 
         final TraceId traceId = populateTraceIdFromRequest(headers);
         // If there's no trasanction id, a new trasaction begins here.
-        final Trace trace = traceId == null ? traceContext.newTraceObject() : traceContext.continueTraceObject(traceId);
+        final Trace trace = traceId == null ? traceContext.newTraceObject("") : traceContext.continueTraceObject(traceId);
         if (trace.canSampled()) {
             final SpanRecorder recorder = trace.getSpanRecorder();
             recordRootSpan(recorder, connection, exchange, routingKey, headers);

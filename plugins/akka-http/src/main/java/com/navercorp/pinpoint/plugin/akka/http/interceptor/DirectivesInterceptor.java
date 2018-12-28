@@ -170,7 +170,7 @@ public class DirectivesInterceptor implements AroundInterceptor {
             }
             return trace;
         } else {
-            final Trace trace = traceContext.newAsyncTraceObject();
+            final Trace trace = traceContext.newAsyncTraceObject("");
             if (trace.canSampled()) {
                 final SpanRecorder recorder = trace.getSpanRecorder();
                 recordRootSpan(recorder, request);
